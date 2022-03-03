@@ -1,0 +1,47 @@
+﻿@using WebThales.Models
+@model IEnumerable<Employee>
+@{
+    Layout = "_Layout"; ViewBag.Title = "Employees";
+}
+
+<h2>Employees</h2>
+<a asp-action="SearchEmployee" class="btn btn-sm btn-primary">Search</a>
+<a asp-action="GetEmployee" class="btn btn-sm btn-secondary">Get Employee</a>
+
+
+<table class="table table-sm table-striped table-bordered m-2">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>Age</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+
+                <td>@r.id</td>
+                <td>@r.employee_name</td>
+                <td>@r.employee_salary</td>
+                <td>@r.employee_age</td>
+                <td>@r.profile_image</td>
+
+                <td>
+                    <a asp-action="UpdateEmployee" asp-route-id="@r.id">
+                        <img src="/icon/edit.png" />
+                    </a>
+                </td>
+                <td>
+                    <form asp-action="Search employee" method="post">
+                        <input type="hidden" value="@r.id" name="employeeId" />
+                        <input type="image" src="/icon/close.png" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
