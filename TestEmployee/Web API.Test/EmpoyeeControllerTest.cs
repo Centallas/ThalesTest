@@ -7,6 +7,7 @@ using Data_Access_Layer;
 using Data_Access_Layer.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Web_API.Controllers;
 using Xunit;
 
@@ -37,13 +38,23 @@ namespace Web_API.Test
             Assert.IsType<OkObjectResult>(result.Result);
             var list = result.Result as OkObjectResult;
 
-            Assert.IsType<List<EmployeeDto>>(list.Value);
+            Assert.IsType<List<SaanDto>>(list.Value);
 
-            var listEmployee = list.Value as List<EmployeeDto>;
+            var listEmployee = list.Value as List<SaanDto>;
             //There are currently 13 records in db. 02-15-2022
             Assert.Equal(24, listEmployee.Count);
-        }       
-       
+        }
+
+        [Fact]
+        public void GetSaanDto()
+        {
+
+            var result = _service.GetAllEmployee();
+            Assert.IsType<List<SaanDto>>(result.Result);
+            Assert.Equal("3849600", (IEnumerable<char>)result.Result.FindLast(x => x.id == 1).employee_annual_salary.ToString());
+         
+        }
+
         [Fact]
         public void ValidateMappingConfig()
         {

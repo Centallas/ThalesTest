@@ -19,8 +19,6 @@ namespace WebThales.Controllers
             {
                 using (var response = await httpClient.GetAsync("https://localhost:44353/api/employee/"))
                 {
-                    Thread.Sleep(5000);
-
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     var empl = JsonConvert.DeserializeObject<List<Employee>>(apiResponse);
                     employees = empl;
@@ -28,6 +26,6 @@ namespace WebThales.Controllers
             }
             return View(employees);
         }
-       
+
     }
 }

@@ -4,7 +4,7 @@ using AutoMapper;
 
 namespace Business_Logic_Layer.Core
 {
-    public class MappingProfiles : Profile
+    public class MappingProfiles : AutoMapper.Profile
     {
         public MappingProfiles()
         {
@@ -12,6 +12,10 @@ namespace Business_Logic_Layer.Core
                 .ConstructUsing(user => new EmployeeDto(user.id))
                 .ReverseMap()
                 .ConstructUsing(userDto => new EmployeeEntity(userDto.id));
+
+            CreateMap<EmployeeDto, SaanDto>().ForMember(x => x.employee_annual_salary,
+                opt => opt.Ignore());
+                //.ForMember(d => d.id, o => o.MapFrom(s => s.id));
 
         }
 

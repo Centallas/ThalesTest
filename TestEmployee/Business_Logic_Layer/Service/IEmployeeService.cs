@@ -7,7 +7,7 @@ namespace Business_Logic_Layer.Service
 {
     public interface IEmployeeService
     {
-        Task<List<EmployeeDto>> GetAllEmployee();
+        Task<List<SaanDto>> GetAllEmployee();      
         //Task<EmployeeDto> GetEmployeeById(int id);
         //Task<EmployeeDto> InsertEmployee(EmployeeEntity emp);
         //Task<EmployeeDto> UpdateEmployee(int id, EmployeeEntity emp);

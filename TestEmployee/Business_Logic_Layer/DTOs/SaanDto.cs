@@ -1,7 +1,18 @@
-﻿namespace WebThales.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Business_Logic_Layer.DTOs
 {
-    public class Employee
+    public class SaanDto
     {
+        public SaanDto(int id)
+        {
+            this.id = id;
+        }
+
         public int id { get; set; }
         public string employee_name { get; set; }
         public int employee_salary { get; set; }

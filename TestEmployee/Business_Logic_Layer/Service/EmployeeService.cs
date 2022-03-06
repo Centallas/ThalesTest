@@ -1,11 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Autofac;
 using AutoMapper;
-using AutoMapper.Contrib.Autofac.DependencyInjection;
 using Business_Logic_Layer.DTOs;
 using Data_Access_Layer;
-using Data_Access_Layer.Repository;
 using Entity;
 
 namespace Business_Logic_Layer.Service
@@ -19,11 +16,16 @@ namespace Business_Logic_Layer.Service
             _employee = employee;
             _mapper = mapper;
         }
-        public async Task<List<EmployeeDto>> GetAllEmployee()
+        public async Task<List<SaanDto>> GetAllEmployee()
         {
             var resService = await _employee.GetAllEmployee();
-            return MapListEmployeeEntity(resService);
 
+            var resDto = MapListEmployeeEntity(resService);
+
+            var saanDyo = new AnnualSalary();
+            var result = await saanDyo.GetEmplAnnualSalary(resDto,_mapper);
+           
+            return result;
         }
         private EmployeeDto MapEmployeeEntity(EmployeeEntity employee)
         {
@@ -34,6 +36,8 @@ namespace Business_Logic_Layer.Service
         {
             return _mapper.Map<List<EmployeeDto>>(resService);
         }
+
+     
 
     }
 }
